@@ -1,6 +1,6 @@
 # Hype Dashboard 🎮
 
-**Versiyon:** 1.2.0
+**Versiyon:** 1.2.1
 
 Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en popüler klipleri tek bir yerden görüntüleyin!
 
@@ -54,7 +54,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Chrome/Edge'de `chrome://extensions` adresine gidin
 4. Sağ üst köşeden **"Geliştirici modu"** aktif edin
 5. **"Paketlenmemiş öğe yükle"** butonuna tıklayın
-6. `hype_dashboard_v1.2.0` klasörünü seçin
+6. `hype_dashboard_v1.2.1` klasörünü seçin
 
 ### Brave / Opera
 1. [Releases](https://github.com/k71809722/hype-dashboard/releases) sayfasından son sürümü indirin
@@ -62,7 +62,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Tarayıcınızda eklentiler sayfasına gidin
 4. **Geliştirici modu** aktif edin
 5. **"Paketlenmemiş eklenti yükle"** seçeneğini kullanın
-6. `hype_dashboard_v1.2.0` klasörünü seçin
+6. `hype_dashboard_v1.2.1` klasörünü seçin
 
 
 ## 🔧 Teknik Detaylar
@@ -101,6 +101,9 @@ hype_dashboard_v1.2.0/
 ---
 
 ## 📊 Versiyon Geçmişi
+### v1.2.1 (06.12.2025)
+
+- ✅ küçük bir hata giderildi.
 
 ### v1.2.0 (06.12.2025)
 **Yeni Özellikler:**
