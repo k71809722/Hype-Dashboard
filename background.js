@@ -1,9 +1,21 @@
-// Background Script for Hype Companion
+// Background Script for Hype Dashboard
 const KICK_CHANNEL = 'hype';
 const API_URL = `https://kick.com/api/v1/channels/${KICK_CHANNEL}`;
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
     console.log("Hype Haber Merkezi Yüklendi!");
+
+    if (details.reason === 'install') {
+        // First install - show onboarding
+        chrome.storage.local.set({
+            onboardingShown: false,
+            onboardingDontShowAgain: false
+        });
+        chrome.tabs.create({ url: 'onboarding.html' });
+    } else if (details.reason === 'update') {
+        console.log('Updated to v1.2.0');
+    }
+
     chrome.alarms.create("checkStream", { periodInMinutes: 1 });
     checkStreamStatus(); // Check immediately on install
 });

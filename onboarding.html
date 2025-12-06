@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoş Geldiniz - Hype Dashboard</title>
+    <link rel="stylesheet" href="onboarding.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="onboarding-container">
+        <!-- Header -->
+        <header class="onboarding-header">
+            <img src="icons/icon48.png" alt="Hype Dashboard" class="logo">
+            <h1>HYPE DASHBOARD'A HOŞ GELDİNİZ! 🎉</h1>
+            <p class="subtitle">Hype'ı takip etmenin en kolay yolu</p>
+        </header>
+
+        <!-- Progress Steps -->
+        <div class="steps-indicator">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Pinle</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Keşfet</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Başla</div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Step 1: Pin Extension -->
+            <div class="step-content active" id="step1">
+                <div class="step-icon">📌</div>
+                <h2>Eklentiyi Sabitleyin!</h2>
+                <p class="step-description">Hype Dashboard'a hızlı erişim için eklentiyi tarayıcı araç çubuğuna
+                    sabitleyin.</p>
+
+                <div class="instruction-box">
+                    <div class="instruction-item">
+                        <span class="number">1</span>
+                        <p>Tarayıcı araç çubuğundaki <strong>puzzle ikonuna (🧩)</strong> tıklayın</p>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="number">2</span>
+                        <p><strong>"Hype Haber Merkezi"</strong> yanındaki <strong>pin ikonuna (📌)</strong> tıklayın
+                        </p>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="number">3</span>
+                        <p>Eklenti artık <strong>her zaman görünür</strong> olacak!</p>
+                    </div>
+                </div>
+
+                <div class="visual-hint">
+                    <div class="browser-bar">
+                        <div class="puzzle-icon">🧩</div>
+                        <div class="arrow">→</div>
+                        <div class="pin-action">
+                            <span>Hype Haber Merkezi</span>
+                            <span class="pin-icon">📌</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Features -->
+            <div class="step-content" id="step2">
+                <div class="step-icon">✨</div>
+                <h2>Özellikleri Keşfedin</h2>
+                <p class="step-description">Hype Dashboard ile neler yapabilirsiniz?</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📡</div>
+                        <h3>Canlı Yayın Takibi</h3>
+                        <p>Hype canlıya girdiğinde anında bildirim alın</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎬</div>
+                        <h3>Kick Klipleri</h3>
+                        <p>En çok izlenen klipleri filtreleyin</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📺</div>
+                        <h3>YouTube & VOD'lar</h3>
+                        <p>Son videoları ve yayınları görüntüleyin</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3>Sosyal Medya</h3>
+                        <p>Tüm platformlara hızlı erişim</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Get Started -->
+            <div class="step-content" id="step3">
+                <div class="step-icon">🚀</div>
+                <h2>Kullanmaya Başlayın!</h2>
+                <p class="step-description">Hype Dashboard kullanıma hazır</p>
+
+                <div class="quick-tips">
+                    <div class="tip">
+                        <span class="tip-icon">💡</span>
+                        <div>
+                            <strong>Sekmeleri Kullanın</strong>
+                            <p>Akış, Klipler, Medya ve Sosyal sekmeleri arasında geçiş yapın</p>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">⏱️</span>
+                        <div>
+                            <strong>Zaman Filtrelerini Deneyin</strong>
+                            <p>Kliplerde 1, 7 veya 30 günlük filtreleri kullanın</p>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <span class="tip-icon">🔔</span>
+                        <div>
+                            <strong>Bildirimleri Açın</strong>
+                            <p>Yayın başladığında otomatik bildirim alın</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ready-box">
+                    <h3>Hazır mısınız?</h3>
+                    <p>Hype'ı takip etmeye başlamak için butona tıklayın!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="onboarding-footer">
+            <label class="checkbox-container">
+                <input type="checkbox" id="dontShowAgain">
+                <span>Bir daha gösterme</span>
+            </label>
+
+            <div class="button-group">
+                <button id="prevBtn" class="btn btn-secondary" style="display: none;">Geri</button>
+                <button id="nextBtn" class="btn btn-primary">İleri</button>
+                <button id="startBtn" class="btn btn-success" style="display: none;">Başla</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+
+</html>

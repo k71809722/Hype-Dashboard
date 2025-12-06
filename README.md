@@ -1,6 +1,6 @@
 # Hype Dashboard 🎮
 
-**Versiyon:** 1.1.0
+**Versiyon:** 1.2.0
 
 Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en popüler klipleri tek bir yerden görüntüleyin!
 
@@ -26,11 +26,17 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 - Tarih ve küçük resim bilgileri
 - Tek tıkla VOD'a erişim
 
-#### Kick Klipleri ⭐ YENİ
+#### Kick Klipleri
 - **Zaman Filtreleri:** 1 Gün, 7 Gün, 30 Gün
 - **En Çok İzlenenler:** Otomatik sıralama
 - **Akıllı Pagination:** Son 30 günün tüm klipleri
 - **Canlı Güncelleme:** Her popup açılışında yeni klipler
+
+### 🎓 Onboarding Ekranı ⭐ YENİ
+- **İlk Yükleme Tutorial:** Eklenti ilk yüklendiğinde açılır
+- **Pin Talimatı:** Eklentiyi nasıl sabitleyeceğinizi gösterir
+- **Özellik Tanıtımı:** Tüm özellikleri keşfedin
+- **Kullanım Kılavuzu:** Hızlı başlangıç ipuçları
 
 ### 🔗 Sosyal Medya
 - YouTube: @AyniSinemalar
@@ -48,7 +54,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Chrome/Edge'de `chrome://extensions` adresine gidin
 4. Sağ üst köşeden **"Geliştirici modu"** aktif edin
 5. **"Paketlenmemiş öğe yükle"** butonuna tıklayın
-6. `hype_dashboard_v1.1.0` klasörünü seçin
+6. `hype_dashboard_v1.2.0` klasörünü seçin
 
 ### Brave / Opera
 1. [Releases](https://github.com/k71809722/hype-dashboard/releases) sayfasından son sürümü indirin
@@ -56,7 +62,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Tarayıcınızda eklentiler sayfasına gidin
 4. **Geliştirici modu** aktif edin
 5. **"Paketlenmemiş eklenti yükle"** seçeneğini kullanın
-6. `hype_dashboard_v1.1.0` klasörünü seçin
+6. `hype_dashboard_v1.2.0` klasörünü seçin
 
 
 ## 🔧 Teknik Detaylar
@@ -76,12 +82,15 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 
 ### Dosya Yapısı
 ```
-hype_dashboard_v1.1.0/
+hype_dashboard_v1.2.0/
 ├── manifest.json          # Eklenti yapılandırması
 ├── popup.html            # Ana arayüz
 ├── popup.css             # Stil dosyası
 ├── popup.js              # Arayüz mantığı
 ├── background.js         # Arka plan işlemleri
+├── onboarding.html       # ⭐ Onboarding ekranı
+├── onboarding.css        # ⭐ Onboarding stilleri
+├── onboarding.js         # ⭐ Onboarding mantığı
 ├── icons/                # Eklenti simgeleri
 │   ├── icon16.png
 │   ├── icon48.png
@@ -92,6 +101,17 @@ hype_dashboard_v1.1.0/
 ---
 
 ## 📊 Versiyon Geçmişi
+
+### v1.2.0 (06.12.2025)
+**Yeni Özellikler:**
+- ✅ **Onboarding Ekranı:** İlk yükleme tutorial
+- ✅ **Pin Talimatı:** Eklentiyi sabitleme rehberi
+- ✅ **Özellik Tanıtımı:** Interaktif özellik turu
+- ✅ "Bir daha gösterme" seçeneği
+
+**İyileştirmeler:**
+- ✅ Kullanıcı deneyimi iyileştirildi
+- ✅ İlk kullanım kolaylaştırıldı
 
 ### v1.1.0 (06.12.2025)
 **Yeni Özellikler:**

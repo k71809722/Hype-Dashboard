@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if onboarding should be shown
+    chrome.storage.local.get(['onboardingShown', 'onboardingDontShowAgain'], (result) => {
+        if (!result.onboardingShown && !result.onboardingDontShowAgain) {
+            window.location.href = 'onboarding.html';
+            return;
+        }
+    });
+
     const navBtns = document.querySelectorAll('.nav-btn');
     const views = document.querySelectorAll('.view');
 
