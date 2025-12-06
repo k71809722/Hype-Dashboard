@@ -52,7 +52,7 @@ async function checkStreamStatus() {
 
             // Trigger Notification if newly live
             if (isLive && (!wasLive || (livestream.id !== lastStreamId))) {
-                chrome.notifications.create('hype-live', {
+                chrome.notifications.create('hype-live-' + Date.now(), {
                     type: 'basic',
                     iconUrl: 'icons/icon128.png',
                     title: 'HYPE YAYINDA! 🔴',
