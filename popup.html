@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hype Companion</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="brand">
+                <img src="icons/icon48.png" alt="Logo" class="logo-img">
+                <span>HYPE</span>
+            </div>
+            <div id="connectionStatus" class="status-badge offline">disconnected</div>
+        </header>
+
+        <!-- Hero Section (Live Status) -->
+        <section id="heroSection" class="hero-section">
+            <div class="live-indicator-ring">
+                <div id="livePulse" class="pulse-ring"></div>
+                <div id="heroIcon" class="hero-icon">🔴</div>
+            </div>
+            <h2 id="heroTitle">YAYIN KAPALI</h2>
+            <p id="heroSubtitle">Hype şu an çevrimdışı.</p>
+
+            <div id="liveStats" class="live-stats" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-value" id="viewersVal">0</span>
+                    <span class="stat-label">İzleyici</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="categoryVal">-</span>
+                    <span class="stat-label">Kategori</span>
+                </div>
+            </div>
+
+            <a href="https://kick.com/hype" target="_blank" id="mainActionBtn" class="action-btn kick">KICK KANALINA
+                GİT</a>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="nav-btn active" data-target="feed">AKIŞ</button>
+            <button class="nav-btn" data-target="media">MEDYA</button>
+            <button class="nav-btn" data-target="socials">SOSYAL</button>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content-area">
+
+            <!-- FEED TAB (General Info & Latest) -->
+            <div id="feed" class="view active">
+                <div class="section-label">SON DURUM</div>
+                <div class="info-card">
+                    <div class="info-icon">📢</div>
+                    <div class="info-text">
+                        <h4>Bildirimler Açık</h4>
+                        <p>Yayın başladığında haber vereceğim.</p>
+                    </div>
+                </div>
+
+                <div class="section-label" style="margin-top: 25px;">KICK: SON YAYINLAR</div>
+                <div id="kickFeed" class="media-grid">
+                    <p class="placeholder-text">Yükleniyor...</p>
+                </div>
+            </div>
+
+            <!-- MEDIA TAB (YouTube/Clips) -->
+            <div id="media" class="view">
+                <div class="section-label">YOUTUBE: AYNI SİNEMALAR</div>
+                <div id="youtubeFeed" class="media-grid">
+                    <!-- Loaded dynamically -->
+                    <p class="placeholder-text">Videolar yükleniyor...</p>
+                </div>
+            </div>
+
+            <!-- SOCIALS TAB -->
+            <div id="socials" class="view">
+                <div class="social-list">
+                    <a href="https://kick.com/hype" target="_blank" class="social-card kick">
+                        <span class="icon">🟩</span>
+                        <div class="details">
+                            <span class="name">Kick</span>
+                            <span class="handle">@hype</span>
+                        </div>
+                        <span class="arrow">→</span>
+                    </a>
+
+                    <a href="https://www.youtube.com/@AyniSinemalar" target="_blank" class="social-card yt">
+                        <span class="icon">🟥</span>
+                        <div class="details">
+                            <span class="name">YouTube</span>
+                            <span class="handle">@AyniSinemalar</span>
+                        </div>
+                        <span class="arrow">→</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/aynisinemalar/" target="_blank" class="social-card insta">
+                        <span class="icon">📸</span>
+                        <div class="details">
+                            <span class="name">Instagram</span>
+                            <span class="handle">@aynisinemalar</span>
+                        </div>
+                        <span class="arrow">→</span>
+                    </a>
+
+                    <a href="https://twitter.com/aynisinemalar" target="_blank" class="social-card tw">
+                        <span class="icon">🐦</span>
+                        <div class="details">
+                            <span class="name">Twitter/X</span>
+                            <span class="handle">@aynisinemalar</span>
+                        </div>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
