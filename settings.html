@@ -119,6 +119,27 @@
                     </div>
 
                     <div class="setting-group">
+                        <h3 class="group-title">Gelişmiş Bildirimler</h3>
+
+                        <label class="setting-toggle">
+                            <input type="checkbox" id="notifyOnCategoryChange">
+                            <span class="toggle-slider"></span>
+                            <span class="label-text">Kategori Değiştiğinde Bildir</span>
+                        </label>
+
+                        <div style="margin-top: 15px;">
+                            <label class="setting-label">
+                                <span class="label-text">Sadece Şu Kategoride Bildir (Opsiyonel)</span>
+                                <input type="text" id="targetCategoryFilter" placeholder="Örn: Just Chatting"
+                                    class="setting-input">
+                                <small style="display:block; color:#666; font-size:11px; margin-top:5px;">Sadece
+                                    yazdığınız kategoriyle eşleşen yayınlar veya oyun değişiklikleri için bildirim
+                                    alırsınız. Boş bırakırsanız hepsi için gelir.</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
                         <button id="testNotification" class="btn btn-secondary">Test Bildirimi Gönder</button>
                     </div>
                 </section>
@@ -146,7 +167,7 @@
 
         <!-- Footer -->
         <footer class="settings-footer">
-            <div class="version-info">v2.0.0</div>
+            <div class="version-info">v2.1.0</div>
             <div class="footer-actions">
                 <button id="saveBtn" class="btn btn-primary">Kaydet</button>
             </div>

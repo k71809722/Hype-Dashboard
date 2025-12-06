@@ -9,8 +9,12 @@ const DEFAULT_SETTINGS = {
         quietHours: {
             enabled: false,
             start: '22:00',
+            enabled: false,
+            start: '22:00',
             end: '08:00'
-        }
+        },
+        notifyOnCategoryChange: true,
+        targetCategoryFilter: ''
     }
 };
 
@@ -46,6 +50,10 @@ function populateSettings() {
     document.getElementById('quietHoursEnabled').checked = currentSettings.notifications?.quietHours?.enabled || false;
     document.getElementById('quietHoursStart').value = currentSettings.notifications?.quietHours?.start || '22:00';
     document.getElementById('quietHoursEnd').value = currentSettings.notifications?.quietHours?.end || '08:00';
+
+    // Advanced Notifications
+    document.getElementById('notifyOnCategoryChange').checked = currentSettings.notifications?.notifyOnCategoryChange || false;
+    document.getElementById('targetCategoryFilter').value = currentSettings.notifications?.targetCategoryFilter || '';
 
 
 }
@@ -137,7 +145,9 @@ function saveSettings() {
                 enabled: document.getElementById('quietHoursEnabled').checked,
                 start: document.getElementById('quietHoursStart').value,
                 end: document.getElementById('quietHoursEnd').value
-            }
+            },
+            notifyOnCategoryChange: document.getElementById('notifyOnCategoryChange').checked,
+            targetCategoryFilter: document.getElementById('targetCategoryFilter').value.trim()
         }
     };
 

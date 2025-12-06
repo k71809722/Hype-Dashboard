@@ -42,36 +42,43 @@ async function checkStreamStatus() {
         const livestream = data.livestream;
         const isLive = livestream !== null;
 
-        chrome.storage.local.get(['isLive', 'lastStreamId'], (result) => {
+        chrome.storage.local.get(['isLive', 'lastStreamId', 'lastStreamCategory'], (result) => {
             const wasLive = result.isLive || false;
             const lastStreamId = result.lastStreamId || 0;
+            const lastStreamCategory = result.lastStreamCategory || '';
+
+            const currentCategory = isLive ? (livestream.categories[0]?.name || 'Yayın') : '';
 
             // Update storage
             chrome.storage.local.set({
                 isLive: isLive,
+                lastStreamCategory: currentCategory,
                 streamData: isLive ? {
                     title: livestream.session_title,
                     viewers: livestream.viewer_count,
-                    category: livestream.categories[0]?.name || 'Yayın',
+                    category: currentCategory,
                     thumbnail: livestream.thumbnail?.url
                 } : null
             });
 
-            // Trigger Notification if newly live
-            if (isLive && (!wasLive || (livestream.id !== lastStreamId))) {
-                // Check notification settings before sending
+            // LOGIC SPLIT:
+            // 1. Stream JUST Started (New Stream)
+            // 2. Stream Already Live BUT Category Changed
+            const isNewStream = isLive && (!wasLive || livestream.id !== lastStreamId);
+            const isCategoryChange = isLive && wasLive && (livestream.id === lastStreamId) && (currentCategory !== lastStreamCategory);
+
+            if (isNewStream || isCategoryChange) {
                 chrome.storage.local.get(['settings'], (settingsResult) => {
                     const settings = settingsResult.settings || {};
                     const notifSettings = settings.notifications || { enabled: true };
 
-                    // Check if notifications are enabled
+                    // 1. Global Enabled Check
                     if (!notifSettings.enabled) {
-
-                        chrome.storage.local.set({ lastStreamId: livestream.id });
+                        if (isNewStream) chrome.storage.local.set({ lastStreamId: livestream.id });
                         return;
                     }
 
-                    // Check quiet hours
+                    // 2. Quiet Hours Check
                     if (notifSettings.quietHours?.enabled) {
                         const now = new Date();
                         const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
@@ -79,25 +86,57 @@ async function checkStreamStatus() {
                         const end = notifSettings.quietHours.end || '08:00';
 
                         if (isInQuietHours(currentTime, start, end)) {
-
-                            chrome.storage.local.set({ lastStreamId: livestream.id });
+                            if (isNewStream) chrome.storage.local.set({ lastStreamId: livestream.id });
                             return;
                         }
                     }
 
-                    // Send notification
+                    // 3. Category Filter Logic
+                    const targetCategory = (notifSettings.targetCategoryFilter || '').trim().toLowerCase();
+                    const currentCategoryLower = currentCategory.toLowerCase();
+
+                    // If filter is set, ONLY notify if matches
+                    if (targetCategory.length > 0) {
+                        if (!currentCategoryLower.includes(targetCategory)) {
+                            // Does not match user's filter -> No Notification
+                            if (isNewStream) chrome.storage.local.set({ lastStreamId: livestream.id });
+                            return;
+                        }
+                    }
+
+                    // 4. Category Change Logic
+                    if (isCategoryChange) {
+                        // Only notify if setting is enabled
+                        if (!notifSettings.notifyOnCategoryChange) return;
+
+                        // Only notify if distinct enough (prevent flickering empty strings)
+                        if (!lastStreamCategory || !currentCategory) return;
+                    }
+
+                    // 5. Send Notification
                     const isSilent = notifSettings.sound === 'none';
-                    chrome.notifications.create('hype-live-' + Date.now(), {
+                    let title = 'HYPE YAYINDA! 🔴';
+                    let message = livestream.session_title || 'Koş, yayın başladı!';
+                    let contextMessage = 'Yayın Başladı';
+
+                    if (isCategoryChange) {
+                        title = 'KATEGORİ DEĞİŞTİ! 🔄';
+                        message = `Hype şimdi ${currentCategory} oynuyor!`;
+                        contextMessage = `Önceki: ${lastStreamCategory}`;
+                    }
+
+                    chrome.notifications.create(`hype-live-${Date.now()}`, {
                         type: 'basic',
                         iconUrl: 'icons/icon128.png',
-                        title: 'HYPE YAYINDA! 🔴',
-                        message: livestream.session_title || 'Koş, yayın başladı!',
+                        title: title,
+                        message: message,
+                        contextMessage: contextMessage,
                         priority: 2,
-                        requireInteraction: true, // Keeps notification visible
-                        silent: isSilent // Respect sound setting
+                        requireInteraction: true,
+                        silent: isSilent
                     });
 
-                    chrome.storage.local.set({ lastStreamId: livestream.id });
+                    if (isNewStream) chrome.storage.local.set({ lastStreamId: livestream.id });
                 });
             }
 
@@ -106,7 +145,6 @@ async function checkStreamStatus() {
 
     } catch (error) {
         console.error('Kick API Error:', error);
-        // Fallback or maintain previous state logic can go here
     }
 }
 
