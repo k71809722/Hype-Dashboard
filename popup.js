@@ -1,4 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const views = document.querySelectorAll('.view');
+
+    // Load settings first
+    chrome.storage.local.get(['settings'], (result) => {
+        const settings = result.settings || {};
+
+        // Set default tab
+        const defaultTab = settings.defaultTab || 'feed';
+
+        // Remove all active classes first
+        navBtns.forEach(b => b.classList.remove('active'));
+        views.forEach(v => v.classList.remove('active'));
+
+        // Activate default tab
+        const defaultNavBtn = document.querySelector(`[data-target="${defaultTab}"]`);
+        const defaultView = document.getElementById(defaultTab);
+        if (defaultNavBtn && defaultView) {
+            defaultNavBtn.classList.add('active');
+            defaultView.classList.add('active');
+        }
+    });
+
     // Check if onboarding should be shown
     chrome.storage.local.get(['onboardingShown', 'onboardingDontShowAgain'], (result) => {
         if (!result.onboardingShown && !result.onboardingDontShowAgain) {
@@ -7,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const navBtns = document.querySelectorAll('.nav-btn');
-    const views = document.querySelectorAll('.view');
-
+    // Tab Navigation
     navBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             navBtns.forEach(b => b.classList.remove('active'));
@@ -20,15 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Settings button handler
+    const settingsBtn = document.getElementById('settingsBtn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+            chrome.tabs.create({ url: 'settings.html' });
+        });
+    }
+
     updateUI();
     fetchYouTubeFeed();
     fetchKickVODs();
     fetchKickClips(7);
 
+
     const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const period = parseInt(btn.getAttribute('data-period'));
             fetchKickClips(period);
@@ -161,7 +191,7 @@ async function fetchKickClips(timePeriod = 7) {
     const container = document.getElementById('clipsFeed');
     const BASE_URL = 'https://kick.com/api/v2/channels/hype/clips';
 
-    console.log(`\n=== FETCHING CLIPS FOR ${timePeriod} DAYS (LIMITED TO 30 DAYS) ===`);
+
 
     try {
         let allClips = [];
@@ -171,11 +201,11 @@ async function fetchKickClips(timePeriod = 7) {
 
         while (true) {
             const url = cursor ? `${BASE_URL}?cursor=${cursor}` : BASE_URL;
-            console.log(`Page ${pageCount + 1}`);
+
 
             const response = await fetch(url);
             if (!response.ok) {
-                console.log('API request failed, stopping');
+
                 break;
             }
 
@@ -183,7 +213,7 @@ async function fetchKickClips(timePeriod = 7) {
             const clips = data.clips || [];
 
             if (clips.length === 0) {
-                console.log('No more clips, stopping');
+
                 break;
             }
 
@@ -194,7 +224,7 @@ async function fetchKickClips(timePeriod = 7) {
             for (const clip of clips) {
                 const clipDate = new Date(clip.created_at);
                 if (clipDate < maxAgeDate) {
-                    console.log(`Reached 30-day limit, stopping at page ${pageCount + 1}`);
+
                     shouldStop = true;
                     break;
                 }
@@ -207,7 +237,7 @@ async function fetchKickClips(timePeriod = 7) {
             if (!cursor || shouldStop) break;
         }
 
-        console.log(`Total clips fetched: ${allClips.length}`);
+
 
         const now = new Date();
         const cutoffDate = new Date(now.getTime() - (timePeriod * 24 * 60 * 60 * 1000));
@@ -217,15 +247,11 @@ async function fetchKickClips(timePeriod = 7) {
             return clipDate >= cutoffDate;
         });
 
-        console.log(`After ${timePeriod} day filter: ${filteredClips.length} clips`);
+
 
         filteredClips.sort((a, b) => (b.views || 0) - (a.views || 0));
 
-        console.log('Top 10 by views:', filteredClips.slice(0, 10).map(c => ({
-            title: c.title,
-            views: c.views,
-            date: new Date(c.created_at).toLocaleDateString()
-        })));
+
 
         const topClips = filteredClips.slice(0, 3);
 
@@ -255,3 +281,5 @@ async function fetchKickClips(timePeriod = 7) {
         container.innerHTML = '<p class="placeholder-text">Klipler yüklenirken hata oluştu.</p>';
     }
 }
+
+

@@ -5,8 +5,8 @@ body {
     background-color: #050505;
     color: #fff;
     font-family: 'Inter', sans-serif;
-    width: 360px;
-    height: 520px;
+    width: 400px;
+    height: 600px;
     overflow: hidden;
 }
 
@@ -79,7 +79,7 @@ body {
 
 /* Hero Section */
 .hero-section {
-    padding: 30px 20px;
+    padding: 15px 20px;
     text-align: center;
     background: linear-gradient(180deg, rgba(83, 252, 24, 0.05) 0%, transparent 100%);
     border-bottom: 1px solid #1a1a1a;
@@ -87,16 +87,16 @@ body {
 
 .live-indicator-ring {
     position: relative;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px auto;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .hero-icon {
-    font-size: 30px;
+    font-size: 20px;
     z-index: 2;
 }
 
@@ -130,7 +130,7 @@ body {
 
 #heroTitle {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
     letter-spacing: 0.5px;
 }
@@ -463,4 +463,68 @@ body {
     border-color: #53fc18;
     color: #53fc18;
     box-shadow: 0 0 10px rgba(83, 252, 24, 0.2);
+}
+
+/* Header Right Section */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #1a1a1a;
+    color: #888;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    background: #333;
+    color: #00ff00;
+    transform: rotate(90deg);
+}
+
+/* Favorite Card Special Styles */
+.favorite-card {
+    position: relative;
+    padding-right: 40px;
+    /* Space for remove button */
+}
+
+.remove-fav-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.2s;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.remove-fav-btn:hover {
+    opacity: 1;
+    background: rgba(255, 0, 0, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.card-link {
+    display: flex;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
 }

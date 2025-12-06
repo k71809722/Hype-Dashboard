@@ -3,7 +3,7 @@ const KICK_CHANNEL = 'hype';
 const API_URL = `https://kick.com/api/v1/channels/${KICK_CHANNEL}`;
 
 chrome.runtime.onInstalled.addListener((details) => {
-    console.log("Hype Haber Merkezi Yüklendi!");
+
 
     if (details.reason === 'install') {
         // First install - show onboarding
@@ -13,10 +13,17 @@ chrome.runtime.onInstalled.addListener((details) => {
         });
         chrome.tabs.create({ url: 'onboarding.html' });
     } else if (details.reason === 'update') {
-        console.log('Updated to v1.2.0');
+
     }
 
-    chrome.alarms.create("checkStream", { periodInMinutes: 1 });
+    // Create alarm with refresh interval from settings
+    chrome.storage.local.get(['settings'], (result) => {
+        const refreshInterval = result.settings?.refreshInterval || 60;
+        const periodInMinutes = refreshInterval / 60; // Convert seconds to minutes
+        chrome.alarms.create("checkStream", { periodInMinutes });
+
+    });
+
     checkStreamStatus(); // Check immediately on install
 });
 
@@ -52,15 +59,46 @@ async function checkStreamStatus() {
 
             // Trigger Notification if newly live
             if (isLive && (!wasLive || (livestream.id !== lastStreamId))) {
-                chrome.notifications.create('hype-live-' + Date.now(), {
-                    type: 'basic',
-                    iconUrl: 'icons/icon128.png',
-                    title: 'HYPE YAYINDA! 🔴',
-                    message: livestream.session_title || 'Koş, yayın başladı!',
-                    priority: 2
-                });
+                // Check notification settings before sending
+                chrome.storage.local.get(['settings'], (settingsResult) => {
+                    const settings = settingsResult.settings || {};
+                    const notifSettings = settings.notifications || { enabled: true };
 
-                chrome.storage.local.set({ lastStreamId: livestream.id });
+                    // Check if notifications are enabled
+                    if (!notifSettings.enabled) {
+
+                        chrome.storage.local.set({ lastStreamId: livestream.id });
+                        return;
+                    }
+
+                    // Check quiet hours
+                    if (notifSettings.quietHours?.enabled) {
+                        const now = new Date();
+                        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                        const start = notifSettings.quietHours.start || '22:00';
+                        const end = notifSettings.quietHours.end || '08:00';
+
+                        if (isInQuietHours(currentTime, start, end)) {
+
+                            chrome.storage.local.set({ lastStreamId: livestream.id });
+                            return;
+                        }
+                    }
+
+                    // Send notification
+                    const isSilent = notifSettings.sound === 'none';
+                    chrome.notifications.create('hype-live-' + Date.now(), {
+                        type: 'basic',
+                        iconUrl: 'icons/icon128.png',
+                        title: 'HYPE YAYINDA! 🔴',
+                        message: livestream.session_title || 'Koş, yayın başladı!',
+                        priority: 2,
+                        requireInteraction: true, // Keeps notification visible
+                        silent: isSilent // Respect sound setting
+                    });
+
+                    chrome.storage.local.set({ lastStreamId: livestream.id });
+                });
             }
 
             updateBadge(isLive);
@@ -79,6 +117,27 @@ function updateBadge(isLive) {
     } else {
         chrome.action.setBadgeText({ text: "" });
     }
+}
+
+// Check if current time is in quiet hours
+function isInQuietHours(currentTime, startTime, endTime) {
+    // Convert times to minutes for easier comparison
+    const toMinutes = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        return hours * 60 + minutes;
+    };
+
+    const current = toMinutes(currentTime);
+    const start = toMinutes(startTime);
+    const end = toMinutes(endTime);
+
+    // Handle overnight quiet hours (e.g., 22:00 to 08:00)
+    if (start > end) {
+        return current >= start || current < end;
+    }
+
+    // Normal quiet hours (e.g., 13:00 to 15:00)
+    return current >= start && current < end;
 }
 
 chrome.notifications.onClicked.addListener(() => {

@@ -1,6 +1,6 @@
 # Hype Dashboard 🎮
 
-**Versiyon:** 1.2.1
+**Versiyon:** 2.0.0
 
 Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en popüler klipleri tek bir yerden görüntüleyin!
 
@@ -32,11 +32,11 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 - **Akıllı Pagination:** Son 30 günün tüm klipleri
 - **Canlı Güncelleme:** Her popup açılışında yeni klipler
 
-### 🎓 Onboarding Ekranı ⭐ YENİ
-- **İlk Yükleme Tutorial:** Eklenti ilk yüklendiğinde açılır
-- **Pin Talimatı:** Eklentiyi nasıl sabitleyeceğinizi gösterir
-- **Özellik Tanıtımı:** Tüm özellikleri keşfedin
-- **Kullanım Kılavuzu:** Hızlı başlangıç ipuçları
+### ⚙️ Ayarlar Sayfası ⭐ YENİ
+- **Sessiz Saatler:** Bildirimlerin gelmeyeceği saat aralığı
+- **Varsayılan Sekme:** Eklenti açılışında gösterilecek sekme ayarı
+- **Test Bildirimi:** Bildirim sistemini test etme özelliği
+- **Bildirim Ayarları:** Bildirim sesi ayarı,aç/kapat ayarı.
 
 ### 🔗 Sosyal Medya
 - YouTube: @AyniSinemalar
@@ -54,7 +54,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Chrome/Edge'de `chrome://extensions` adresine gidin
 4. Sağ üst köşeden **"Geliştirici modu"** aktif edin
 5. **"Paketlenmemiş öğe yükle"** butonuna tıklayın
-6. `hype_dashboard_v1.2.1` klasörünü seçin
+6. `hype_dashboard_v2.0.0` klasörünü seçin
 
 ### Brave / Opera
 1. [Releases](https://github.com/k71809722/hype-dashboard/releases) sayfasından son sürümü indirin
@@ -62,7 +62,7 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 3. Tarayıcınızda eklentiler sayfasına gidin
 4. **Geliştirici modu** aktif edin
 5. **"Paketlenmemiş eklenti yükle"** seçeneğini kullanın
-6. `hype_dashboard_v1.2.1` klasörünü seçin
+6. `hype_dashboard_v2.0.0` klasörünü seçin
 
 
 ## 🔧 Teknik Detaylar
@@ -74,23 +74,25 @@ Hype'ın Kick yayınlarını takip edin, YouTube videolarını, VOD'ları ve en 
 - **YouTube RSS Feed:** Channel-based RSS
 
 ### Özellikler
-- **Arka Plan İşlemleri:** Her 1 dakikada bir durum kontrolü
+- **Arka Plan İşlemleri:** Her 1 dakikada bir durum kontrolü (Ayarlanabilir)
 - **Bildirim Sistemi:** Chrome Notifications API
 - **Akıllı Pagination:** 30 günlük klip limiti ile optimizasyon
-- **Caching:** Performans için veri önbellekleme
-- **Responsive Design:** Modern ve kullanıcı dostu arayüz
+- **Storage:** Eklenti ayarları için `storage` permission
 
 ### Dosya Yapısı
 ```
-hype_dashboard_v1.2.0/
+hype_dashboard_v2.0.0/
 ├── manifest.json          # Eklenti yapılandırması
 ├── popup.html            # Ana arayüz
 ├── popup.css             # Stil dosyası
 ├── popup.js              # Arayüz mantığı
+├── settings.html         # ⭐ Ayarlar sayfası
+├── settings.js           # ⭐ Ayarlar mantığı
+├── themes.css            # ⭐ Tema dosyası
 ├── background.js         # Arka plan işlemleri
-├── onboarding.html       # ⭐ Onboarding ekranı
-├── onboarding.css        # ⭐ Onboarding stilleri
-├── onboarding.js         # ⭐ Onboarding mantığı
+├── onboarding.html       # Onboarding ekranı
+├── onboarding.css        # Onboarding stilleri
+├── onboarding.js         # Onboarding mantığı
 ├── icons/                # Eklenti simgeleri
 │   ├── icon16.png
 │   ├── icon48.png
@@ -101,41 +103,22 @@ hype_dashboard_v1.2.0/
 ---
 
 ## 📊 Versiyon Geçmişi
-### v1.2.1 (06.12.2025)
 
-- ✅ küçük bir hata giderildi.
+### v2.0.0 (06.12.2025)
+**Yeni Özellikler:**
+- ✅ **Ayarlar Sayfası:** Detaylı özelleştirme
+- ✅ **Sessiz Saatler:** Bildirim yönetimi
+- ✅ **Test Bildirimi:** Sesli kontrol
+- ✅ Kod temizliği ve optimizasyon
 
 ### v1.2.0 (06.12.2025)
-**Yeni Özellikler:**
-- ✅ **Onboarding Ekranı:** İlk yükleme tutorial
-- ✅ **Pin Talimatı:** Eklentiyi sabitleme rehberi
-- ✅ **Özellik Tanıtımı:** Interaktif özellik turu
-- ✅ "Bir daha gösterme" seçeneği
-
-**İyileştirmeler:**
-- ✅ Kullanıcı deneyimi iyileştirildi
-- ✅ İlk kullanım kolaylaştırıldı
+- ✅ Onboarding Ekranı
 
 ### v1.1.0 (06.12.2025)
-**Yeni Özellikler:**
-- ✅ Kick Klipleri özelliği eklendi
-- ✅ Zaman filtreleri (1/7/30 gün)
-- ✅ Akıllı pagination (30 günlük limit)
-- ✅ Klip sıralaması optimize edildi
-- ✅ Her popup açılışında otomatik yenileme
-
-**İyileştirmeler:**
-- ✅ API performansı optimize edildi
-- ✅ Hata yönetimi iyileştirildi
-- ✅ Console logging eklendi
+- ✅ Kick Klipleri ve Filtreler
 
 ### v1.0.0 (06.12.2025)
-**İlk Sürüm:**
-- ✅ Canlı yayın takibi
-- ✅ YouTube video akışı
-- ✅ Kick VOD akışı
-- ✅ Bildirim sistemi
-- ✅ Sosyal medya bağlantıları
+- ✅ İlk Sürüm
 
 ---
 

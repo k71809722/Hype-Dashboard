@@ -1,0 +1,27 @@
+/* Header Right Section */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: var(--bg-tertiary, #1a1a1a);
+    color: var(--text-secondary, #888);
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    background: var(--border-secondary, #333);
+    color: var(--accent-primary, #00ff00);
+    transform: rotate(90deg);
+}

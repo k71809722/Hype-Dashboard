@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar - Hype Dashboard</title>
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="settings.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="settings-container">
+        <!-- Header -->
+        <header class="settings-header">
+            <div class="header-left">
+                <img src="icons/icon48.png" alt="Hype Dashboard" class="logo">
+                <h1>Ayarlar</h1>
+            </div>
+            <button id="closeBtn" class="close-btn">✕</button>
+        </header>
+
+        <div class="settings-content">
+            <!-- Sidebar -->
+            <aside class="settings-sidebar">
+                <nav class="settings-nav">
+                    <button class="nav-item active" data-section="general">
+                        <span class="icon">🌍</span>
+                        <span>Genel</span>
+                    </button>
+                    <button class="nav-item" data-section="notifications">
+                        <span class="icon">🔔</span>
+                        <span>Bildirimler</span>
+                    </button>
+
+                    <button class="nav-item" data-section="data">
+                        <span class="icon">💾</span>
+                        <span>Veri</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="settings-main">
+                <!-- General Section -->
+                <section class="settings-section active" id="general">
+                    <h2>Genel Ayarlar</h2>
+
+
+
+                    <div class="setting-group">
+                        <label class="setting-label">
+                            <span class="label-text">Başlangıç Sekmesi</span>
+                            <select id="defaultTab" class="setting-select">
+                                <option value="feed">Akış</option>
+                                <option value="clips">Klipler</option>
+                                <option value="media">Medya</option>
+                                <option value="socials">Sosyal</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="setting-label">
+                            <span class="label-text">Veri Yenileme Sıklığı</span>
+                            <select id="refreshInterval" class="setting-select">
+                                <option value="30">30 saniye</option>
+                                <option value="60">1 dakika</option>
+                                <option value="300">5 dakika</option>
+                                <option value="600">10 dakika</option>
+                            </select>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section class="settings-section" id="notifications">
+                    <h2>Bildirim Ayarları</h2>
+
+                    <div class="setting-group">
+                        <label class="setting-toggle">
+                            <input type="checkbox" id="notificationsEnabled" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="label-text">Bildirimleri Etkinleştir</span>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <label class="setting-label">
+                            <span class="label-text">Bildirim Sesi</span>
+                            <select id="notificationSound" class="setting-select">
+                                <option value="default">Varsayılan</option>
+                                <option value="none">Sessiz</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 class="group-title">Sessiz Saatler</h3>
+                        <label class="setting-toggle">
+                            <input type="checkbox" id="quietHoursEnabled">
+                            <span class="toggle-slider"></span>
+                            <span class="label-text">Sessiz Saatleri Etkinleştir</span>
+                        </label>
+                    </div>
+
+                    <div class="setting-group quiet-hours-settings">
+                        <div class="time-inputs">
+                            <label class="setting-label">
+                                <span class="label-text">Başlangıç</span>
+                                <input type="time" id="quietHoursStart" value="22:00" class="setting-input">
+                            </label>
+                            <label class="setting-label">
+                                <span class="label-text">Bitiş</span>
+                                <input type="time" id="quietHoursEnd" value="08:00" class="setting-input">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <button id="testNotification" class="btn btn-secondary">Test Bildirimi Gönder</button>
+                    </div>
+                </section>
+
+
+
+                <!-- Data Section -->
+                <section class="settings-section" id="data">
+                    <h2>Veri Yönetimi</h2>
+
+                    <div class="setting-group">
+                        <h3 class="group-title">Önbellek</h3>
+                        <p class="setting-description">Önbelleğe alınmış verileri temizle</p>
+                        <button id="clearCache" class="btn btn-secondary">Önbelleği Temizle</button>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 class="group-title">Ayarları Sıfırla</h3>
+                        <p class="setting-description">Tüm ayarları varsayılan değerlere döndür</p>
+                        <button id="resetSettings" class="btn btn-danger">Ayarları Sıfırla</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="settings-footer">
+            <div class="version-info">v2.0.0</div>
+            <div class="footer-actions">
+                <button id="saveBtn" class="btn btn-primary">Kaydet</button>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="settings.js"></script>
+</body>
+
+</html>
