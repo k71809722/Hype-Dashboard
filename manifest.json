@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "Hype Haber Merkezi",
-    "version": "1.0",
-    "description": "Hype'ın Kick yayınlarını, YouTube videolarını ve Instagram gönderilerini takip edin.",
+    "version": "1.1.0",
+    "description": "Hype'ın canlı yayın durumunu takip edin, son videoları ve klipleri görüntüleyin.",
     "permissions": [
         "storage",
         "notifications",
